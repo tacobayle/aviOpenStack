@@ -46,6 +46,6 @@ variable "compute" {
     ipCidrData = ["100.64.129.5/24", "100.64.129.6/24"]
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
     defaultGw = "10.206.112.1"
-    dns = ["10.206.8.130", "10.206.8.131"]
+    dns = "10.206.8.130, 10.206.8.131"
   }
 }
