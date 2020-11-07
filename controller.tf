@@ -21,7 +21,7 @@ data "vsphere_virtual_machine" "controller" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 #
-resource "vsphere_virtual_machine" "ubuntu" {
+resource "vsphere_virtual_machine" "controller" {
   count = var.controller.count
   resource_pool_id = data.vsphere_resource_pool.pool.id
   name             = "${var.controller.name}-${count.index}"
