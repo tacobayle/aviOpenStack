@@ -40,7 +40,7 @@ resource "vsphere_virtual_machine" "ubuntu" {
 
   disk {
     size             = var.compute["disk"]
-    label            = "compute.lab_vmdk"
+    label            = "compute-{count.index}.lab_vmdk"
     eagerly_scrub    = data.vsphere_virtual_machine.compute.disks.0.eagerly_scrub
     thin_provisioned = data.vsphere_virtual_machine.compute.disks.0.thin_provisioned
   }
