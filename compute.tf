@@ -58,7 +58,7 @@ resource "vsphere_virtual_machine" "ubuntu" {
      hostname    = var.compute["name"]
      password    = var.compute["password"]
      public-keys = file(var.compute["public_key_path"])
-     user-data   = base64encode(data.template_file.compute_userdata.rendered)
+     user-data   = base64encode(data.template_file.compute_userdata[count.index].rendered)
    }
  }
 
