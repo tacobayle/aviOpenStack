@@ -4,7 +4,7 @@
 variable "vsphere_user" {}
 variable "vsphere_password" {}
 variable "vsphere_server" {}
-
+variable "ubuntu_password" {}
 #
 # Other Variables
 #
@@ -40,7 +40,6 @@ variable "compute" {
     cpu = 8
     memory = 8192
     disk = 200
-    password = "Avi_2020"
     public_key_path = "~/.ssh/cloudKey.pub"
     private_key_path = "~/.ssh/cloudKey"
     wait_for_guest_net_routable = "false"
@@ -60,7 +59,6 @@ variable "controller" {
     cpu = 4
     memory = 8192
     disk = 100
-    password = "Avi_2020"
     public_key_path = "~/.ssh/cloudKey.pub"
     private_key_path = "~/.ssh/cloudKey"
     wait_for_guest_net_routable = "false"
