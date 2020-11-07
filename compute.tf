@@ -1,3 +1,8 @@
+resource "vsphere_tag" "ansible_group_os-compute" {
+  name             = "opencart"
+  category_id      = vsphere_tag_category.ansible_group_os-compute.id
+}
+
 data "template_file" "compute_userdata" {
   count = var.compute.count
   template = file("${path.module}/userdata/ubuntu.userdata")
@@ -53,6 +58,10 @@ resource "vsphere_virtual_machine" "ubuntu" {
   clone {
     template_uuid = data.vsphere_virtual_machine.compute.id
   }
+
+  tags = [
+    vsphere_tag.ansible_group_os-compute.id,
+  ]
 
   vapp {
     properties = {

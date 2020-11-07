@@ -1,13 +1,7 @@
 #cloud-config
-users:
-  - default
-  - name: aviadmin
-    lock_passwd: true
-    shell: /bin/bash
-    sudo:  ALL=(ALL) NOPASSWD:ALL
-    chpasswd: {expire: False}
-    ssh_authorized_keys:
-      - ${pubkey}
+
+packages:
+  - chrony
 
 write_files:
   - content: |

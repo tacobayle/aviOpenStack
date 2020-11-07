@@ -1,3 +1,8 @@
+resource "vsphere_tag" "ansible_group_os-controller" {
+  name             = "os-controller"
+  category_id      = vsphere_tag_category.ansible_group_os-controller.id
+}
+
 data "template_file" "controller_userdata" {
   count = var.controller.count
   template = file("${path.module}/userdata/ubuntu.userdata")
@@ -53,6 +58,10 @@ resource "vsphere_virtual_machine" "ubuntu" {
   clone {
     template_uuid = data.vsphere_virtual_machine.controller.id
   }
+
+  tags = [
+    vsphere_tag.ansible_group_os-controller.id,
+  ]
 
   vapp {
     properties = {

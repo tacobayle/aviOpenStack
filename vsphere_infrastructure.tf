@@ -32,3 +32,19 @@ data "vsphere_network" "networkData" {
   name = var.vcenter.networkMgmt
   datacenter_id = data.vsphere_datacenter.dc.id
 }
+
+resource "vsphere_tag_category" "ansible_group_os-controller" {
+  name = "ansible_group_os-controller"
+  cardinality = "SINGLE"
+  associable_types = [
+    "VirtualMachine",
+  ]
+}
+
+resource "vsphere_tag_category" "ansible_group_os-compute" {
+  name = "ansible_group_os-compute"
+  cardinality = "SINGLE"
+  associable_types = [
+    "VirtualMachine",
+  ]
+}

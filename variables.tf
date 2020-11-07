@@ -69,3 +69,31 @@ variable "controller" {
     dns = "10.206.8.130, 10.206.8.131"
   }
 }
+
+variable "jump" {
+  type = map
+  default = {
+    name = "jump"
+    cpu = 2
+    memory = 4096
+    disk = 30
+    public_key_path = "~/.ssh/cloudKey.pub"
+    private_key_path = "~/.ssh/cloudKey"
+    wait_for_guest_net_timeout = 2
+    template_name = "ubuntu-bionic-18.04-cloudimg-template"
+    avisdkVersion = "18.2.9"
+    username = "ubuntu"
+  }
+}
+
+variable "ansible" {
+  type = map
+  default = {
+    aviPbAbsentUrl = "https://github.com/tacobayle/ansiblePbAviAbsent"
+    aviPbAbsentTag = "v1.36"
+    aviConfigureUrl = "https://github.com/tacobayle/aviConfigure"
+    aviConfigureTag = "v2.12"
+    version = "2.9.12"
+    directory = "ansible"
+  }
+}
