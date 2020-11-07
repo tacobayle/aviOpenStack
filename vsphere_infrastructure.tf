@@ -17,6 +17,12 @@ data "vsphere_resource_pool" "pool" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
+resource "vsphere_folder" "folder" {
+  path          = var.vcenter.folder
+  type          = "vm"
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+
 data "vsphere_network" "networkMgmt" {
   name = var.vcenter.networkMgmt
   datacenter_id = data.vsphere_datacenter.dc.id

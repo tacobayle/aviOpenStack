@@ -20,8 +20,9 @@ data "vsphere_virtual_machine" "compute" {
 resource "vsphere_virtual_machine" "ubuntu" {
   count = var.compute.count
   resource_pool_id = data.vsphere_resource_pool.pool.id
-  name             = "var.compute.name-${count.index}"
+  name             = "${var.compute.name}-${count.index}"
   datastore_id     = data.vsphere_datastore.datastore.id
+  folder           = vsphere_folder.folder.path
   network_interface {
                       network_id = data.vsphere_network.networkMgmt.id
   }
@@ -75,6 +76,4 @@ resource "vsphere_virtual_machine" "ubuntu" {
      "while [ ! -f /tmp/cloudInitDone.log ]; do sleep 1; done"
    ]
   }
-
-
 }
