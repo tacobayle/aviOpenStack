@@ -38,6 +38,7 @@ resource "vsphere_virtual_machine" "ubuntu" {
   scsi_type = data.vsphere_virtual_machine.compute.scsi_type
   scsi_bus_sharing = data.vsphere_virtual_machine.compute.scsi_bus_sharing
   scsi_controller_count = data.vsphere_virtual_machine.compute.scsi_controller_scan_count
+  nested_hv_enabled = true
 
   disk {
     size             = var.compute.disk
@@ -57,7 +58,7 @@ resource "vsphere_virtual_machine" "ubuntu" {
   vapp {
     properties = {
      hostname    = "compute-${count.index}"
-//     password    = var.compute.password
+     password    = var.compute.password
      public-keys = file(var.compute.public_key_path)
      user-data   = base64encode(data.template_file.compute_userdata[count.index].rendered)
    }
