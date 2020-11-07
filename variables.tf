@@ -45,7 +45,7 @@ variable "compute" {
     private_key_path = "~/.ssh/cloudKey"
     wait_for_guest_net_routable = "false"
     template_name = "ubuntu-bionic-18.04-cloudimg-template"
-    ipCidrMgmt = ["10.206.112.117/22", "10.206.112.59/22"]
+    ipCidrMgmt = ["10.206.112.59/22", "10.206.112.124/22"]
     ipCidrData = ["100.64.129.5/24", "100.64.129.6/24"]
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
     defaultGw = "10.206.112.1"
@@ -65,8 +65,8 @@ variable "controller" {
     private_key_path = "~/.ssh/cloudKey"
     wait_for_guest_net_routable = "false"
     template_name = "ubuntu-bionic-18.04-cloudimg-template"
-    ipCidrMgmt = ["10.206.112.117/22", "10.206.112.59/22"]
-    ipCidrData = ["100.64.129.5/24", "100.64.129.6/24"]
+    ipCidrMgmt = ["10.206.113.255/22"]
+    ipCidrData = ["100.64.129.7/24"]
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
     defaultGw = "10.206.112.1"
     dns = "10.206.8.130, 10.206.8.131"
