@@ -1,7 +1,7 @@
 data "template_file" "compute_userdata" {
+  count = var.compute.count
   template = file("${path.module}/userdata/ubuntu.userdata")
   vars = {
-    count = var.compute.count
     password      = var.compute["password"]
     pubkey        = file(var.compute["public_key_path"])
     ipCidrMgmt = element(var.compute.ipCidrMgmt, count.index)
