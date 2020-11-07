@@ -33,7 +33,7 @@ write_files:
       echo "            set-name: $ifaceFirstName" | sudo tee -a ${netplanFile}
       echo "            gateway4: ${defaultGw}" | sudo tee -a ${netplanFile}
       echo "            nameservers:" | sudo tee -a ${netplanFile}
-      echo "              addresses: ${dns}" | sudo tee -a ${netplanFile}
+      echo "              addresses: [${dns}]" | sudo tee -a ${netplanFile}
       echo "        $ifaceLastName:" | sudo tee -a ${netplanFile}
       echo "            dhcp4: false" | sudo tee -a ${netplanFile}
       echo "            addresses: [${ipCidrData}]" | sudo tee -a ${netplanFile}
