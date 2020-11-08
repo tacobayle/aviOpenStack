@@ -80,7 +80,7 @@ variable "jump" {
     public_key_path = "~/.ssh/cloudKey.pub"
     private_key_path = "~/.ssh/cloudKey"
     wait_for_guest_net_timeout = 2
-    template_name = "ubuntu-focal-20.04-cloudimg-template"
+    template_name = "ubuntu-bionic-18.04-cloudimg-template"
     avisdkVersion = "18.2.9"
     username = "ubuntu"
   }
