@@ -10,8 +10,6 @@ data "template_file" "jumpbox_userdata" {
     vsphere_server = var.vsphere_server
     username = var.jump.username
     privateKey = var.jump.private_key_path
-    controlIpCidrMgmt = var.controller.ipCidrMgmt.*
-    computeIpCidrMgmt = var.compute.ipCidrMgmt.*
   }
 }
 #

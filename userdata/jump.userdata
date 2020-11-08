@@ -30,8 +30,6 @@ write_files:
       cp -r /usr/local/share/kolla-ansible/etc_examples/kolla/* /etc/kolla
       sudo chown ${username}:${username} /etc/kolla/*
       cp /usr/local/share/kolla-ansible/ansible/inventory/* /home/${username}/
-      echo "${controlIpCidrMgmt}" | sudo tee /home/${username}/control.txt
-      echo "${computeIpCidrMgmt}" | sudo tee /home/${username}/compute.txt
       sudo chown ${username}:${username} /home/${username}/*
       /usr/local/bin/kolla-genpwd
       echo "cloud init done" | tee /tmp/cloudInitDone.log
