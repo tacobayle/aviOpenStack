@@ -3,6 +3,7 @@
 packages:
   - chrony
 
+
 write_files:
   - content: |
       #!/bin/bash
