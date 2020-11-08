@@ -3,7 +3,6 @@
 packages:
   - language-pack-en
   - python3-pip
-  - python-pip
   - python-jmespath
   - libffi-dev
   - gcc
@@ -26,7 +25,7 @@ write_files:
       pipelining=True
       forks=100
       EOT
-      pip install kolla-ansible
+      pip3 install kolla-ansible
       sudo mkdir -p /etc/kolla
       sudo chown ${username}:${username} /etc/kolla
       cp -r /usr/local/share/kolla-ansible/etc_examples/kolla/* /etc/kolla
