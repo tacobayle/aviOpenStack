@@ -13,6 +13,8 @@ data "template_file" "controller_userdata" {
     defaultGw = var.controller.defaultGw
     dns = var.controller.dns
     netplanFile = var.controller.netplanFile
+    network_interface = var.kolla.network_interface
+    neutron_external_interface = var.kolla.neutron_external_interface
   }
 }
 #
