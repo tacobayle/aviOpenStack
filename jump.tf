@@ -72,9 +72,4 @@ resource "vsphere_virtual_machine" "jump" {
       "while [ ! -f /tmp/cloudInitDone.log ]; do sleep 1; done"
     ]
   }
-
-  provisioner "file" {
-    source = var.jump["private_key_path"]
-    destination = "~/.ssh/${basename(var.jump.private_key_path)}"
-  }
 }

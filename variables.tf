@@ -94,6 +94,7 @@ variable "ansible" {
     aviConfigureUrl = "https://github.com/tacobayle/aviConfigure"
     aviConfigureTag = "v2.12"
     version = "2.9.12"
+    inventory = "multinode"
     directory = "ansible"
   }
 }
