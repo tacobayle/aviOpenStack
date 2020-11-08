@@ -28,7 +28,9 @@ write_files:
       sudo mkdir -p /etc/kolla
       sudo chown ${username}:${username} /etc/kolla
       cp -r /usr/local/share/kolla-ansible/etc_examples/kolla/* /etc/kolla
-      cp /usr/local/share/kolla-ansible/ansible/inventory/* .
+      sudo chown ${username}:${username} /etc/kolla/*
+      cp /usr/local/share/kolla-ansible/ansible/inventory/* /home/${username}/
+      /usr/local/bin/kolla-genpwd
       echo "cloud init done" | tee /tmp/cloudInitDone.log
     path: /opt/bootstrap.sh
     permissions: 0755
