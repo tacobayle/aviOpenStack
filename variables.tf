@@ -98,3 +98,13 @@ variable "ansible" {
     directory = "ansible"
   }
 }
+
+variable "kolla" {
+  type = map
+  default = {
+    distro = "ubuntu"
+    type = "source"
+    network_interface = "eth0"
+    neutron_external_interface = "eth1"
+  }
+}

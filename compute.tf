@@ -13,6 +13,8 @@ data "template_file" "compute_userdata" {
     defaultGw = var.compute.defaultGw
     dns = var.compute.dns
     netplanFile = var.compute.netplanFile
+    network_interface = var.kolla.network_interface
+    neutron_external_interface = var.kolla.neutron_external_interface
   }
 }
 #
