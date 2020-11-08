@@ -27,7 +27,7 @@ write_files:
       echo "            dhcp4: false" | sudo tee -a ${netplanFile}
       echo "            match:" | sudo tee -a ${netplanFile}
       echo "                macaddress: $macLast" | sudo tee -a ${netplanFile}
-      echo "            set-name: ${neutron_external_interface}" | sudo tee -a ${netplanFile}
+      echo "            set-name: $ifaceLastName" | sudo tee -a ${netplanFile}
       echo "    version: 2" | sudo tee -a ${netplanFile}
       sudo netplan apply
       echo "cloud init done" | tee /tmp/cloudInitDone.log

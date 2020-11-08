@@ -1,5 +1,5 @@
 data "template_file" "compute_userdata" {
-  count = var.compute.count
+  count = length(var.compute.ipCidrMgmt)
   template = file("${path.module}/userdata/ubuntu.userdata")
   vars = {
     pubkey        = file(var.compute.public_key_path)
@@ -8,8 +8,6 @@ data "template_file" "compute_userdata" {
     defaultGw = var.compute.defaultGw
     dns = var.compute.dns
     netplanFile = var.compute.netplanFile
-    network_interface = var.kolla.network_interface
-    neutron_external_interface = var.kolla.neutron_external_interface
   }
 }
 
@@ -19,7 +17,7 @@ data "vsphere_virtual_machine" "compute" {
 }
 
 resource "vsphere_virtual_machine" "compute" {
-  count = var.compute.count
+  count = length(var.compute.ipCidrMgmt)
   resource_pool_id = data.vsphere_resource_pool.pool.id
   name             = "${var.compute.name}-${count.index}"
   datastore_id     = data.vsphere_datastore.datastore.id

@@ -34,7 +34,6 @@ variable "wait_for_guest_net_timeout" {
 
 variable "compute" {
   default = {
-    count = 2
     name = "os-compute"
     cpu = 8
     memory = 8192
@@ -53,7 +52,6 @@ variable "compute" {
 
 variable "controller" {
   default = {
-    count = 1
     name = "os-controller"
     cpu = 4
     memory = 8192
@@ -104,9 +102,9 @@ variable "kolla" {
   default = {
     distro = "ubuntu"
     type = "source"
-    network_interface = "eth0"
-    neutron_external_interface = "eth1"
-    internal_vip_address = "1.1.1.1"
+    network_interface = "ens192"
+    neutron_external_interface = "ens224"
+    internal_vip_address = "10.206.112.121"
     globals: "/etc/kolla/globals.yml"
   }
 }
