@@ -23,6 +23,17 @@ data "template_file" "multinode" {
   }
 }
 
+data "template_file" "globals" {
+  template = "${file("templates/globals.yml.tmpl")}"
+  vars = {
+    distro = var.kolla.distro
+    type = var.kolla.type
+    network_interface = var.kolla.network_interface
+    neutron_external_interface = var.kolla.neutron_external_interface
+    internal_vip_address = var.kolla.internal_vip_address
+  }
+}
+
 resource "null_resource" "foo" {
   depends_on = [vsphere_virtual_machine.jump]
   connection {
@@ -41,6 +52,11 @@ resource "null_resource" "foo" {
   provisioner "file" {
     content      = data.template_file.multinode.rendered
     destination = var.ansible.inventory
+  }
+
+  provisioner "file" {
+    content      = data.template_file.globals.rendered
+    destination = var.kolla.globals
   }
 
   provisioner "remote-exec" {

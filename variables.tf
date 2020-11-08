@@ -106,5 +106,7 @@ variable "kolla" {
     type = "source"
     network_interface = "eth0"
     neutron_external_interface = "eth1"
+    internal_vip_address = "1.1.1.1"
+    globals: "/etc/kolla/globals.yml"
   }
 }

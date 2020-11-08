@@ -1,8 +1,3 @@
-resource "vsphere_tag" "ansible_group_os-compute" {
-  name             = "opencart"
-  category_id      = vsphere_tag_category.ansible_group_os-compute.id
-}
-
 data "template_file" "compute_userdata" {
   count = var.compute.count
   template = file("${path.module}/userdata/ubuntu.userdata")
@@ -17,12 +12,12 @@ data "template_file" "compute_userdata" {
     neutron_external_interface = var.kolla.neutron_external_interface
   }
 }
-#
+
 data "vsphere_virtual_machine" "compute" {
   name          = var.compute.template_name
   datacenter_id = data.vsphere_datacenter.dc.id
 }
-#
+
 resource "vsphere_virtual_machine" "compute" {
   count = var.compute.count
   resource_pool_id = data.vsphere_resource_pool.pool.id
@@ -61,10 +56,6 @@ resource "vsphere_virtual_machine" "compute" {
     template_uuid = data.vsphere_virtual_machine.compute.id
   }
 
-  tags = [
-    vsphere_tag.ansible_group_os-compute.id,
-  ]
-
   vapp {
     properties = {
      hostname    = "${var.compute.name}-${count.index}"
@@ -86,4 +77,5 @@ resource "vsphere_virtual_machine" "compute" {
      "while [ ! -f /tmp/cloudInitDone.log ]; do sleep 1; done"
    ]
   }
+
 }

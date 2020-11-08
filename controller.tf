@@ -1,8 +1,3 @@
-resource "vsphere_tag" "ansible_group_os-controller" {
-  name             = "os-controller"
-  category_id      = vsphere_tag_category.ansible_group_os-controller.id
-}
-
 data "template_file" "controller_userdata" {
   count = var.controller.count
   template = file("${path.module}/userdata/ubuntu.userdata")
@@ -17,12 +12,12 @@ data "template_file" "controller_userdata" {
     neutron_external_interface = var.kolla.neutron_external_interface
   }
 }
-#
+
 data "vsphere_virtual_machine" "controller" {
   name          = var.controller.template_name
   datacenter_id = data.vsphere_datacenter.dc.id
 }
-#
+
 resource "vsphere_virtual_machine" "controller" {
   count = var.controller.count
   resource_pool_id = data.vsphere_resource_pool.pool.id
@@ -61,10 +56,6 @@ resource "vsphere_virtual_machine" "controller" {
     template_uuid = data.vsphere_virtual_machine.controller.id
   }
 
-  tags = [
-    vsphere_tag.ansible_group_os-controller.id,
-  ]
-
   vapp {
     properties = {
       hostname    = "${var.controller.name}-${count.index}"
@@ -86,4 +77,5 @@ resource "vsphere_virtual_machine" "controller" {
       "while [ ! -f /tmp/cloudInitDone.log ]; do sleep 1; done"
     ]
   }
+
 }

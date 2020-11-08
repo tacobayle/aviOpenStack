@@ -19,7 +19,7 @@ write_files:
       echo "            addresses: [${ipCidrMgmt}]" | sudo tee -a ${netplanFile}
       echo "            match:" | sudo tee -a ${netplanFile}
       echo "                macaddress: $macFirst" | sudo tee -a ${netplanFile}
-      echo "            set-name: ${network_interface}" | sudo tee -a ${netplanFile}
+      echo "            set-name: $ifaceFirstName" | sudo tee -a ${netplanFile}
       echo "            gateway4: ${defaultGw}" | sudo tee -a ${netplanFile}
       echo "            nameservers:" | sudo tee -a ${netplanFile}
       echo "              addresses: [${dns}]" | sudo tee -a ${netplanFile}

@@ -12,10 +12,10 @@
 #config_strategy: "COPY_ALWAYS"
 
 # Valid options are ['centos', 'debian', 'rhel', 'ubuntu']
-kolla_base_distro: "centos"
+kolla_base_distro: ${distro}
 
 # Valid options are [ binary, source ]
-#kolla_install_type: "binary"
+kolla_install_type: ${type}
 
 # Do not override this unless you know what you are doing.
 #openstack_release: "train"
@@ -34,7 +34,7 @@ kolla_base_distro: "centos"
 # All-In-One without haproxy and keepalived, you can set enable_haproxy to no
 # in "OpenStack options" section, and set this value to the IP of your
 # 'network_interface' as set in the Networking section below.
-#kolla_internal_vip_address: "10.10.10.254"
+kolla_internal_vip_address: ${internal_vip_address}
 
 # This is the DNS name that maps to the kolla_internal_vip_address VIP. By
 # default it is the same as kolla_internal_vip_address.
@@ -95,7 +95,7 @@ kolla_base_distro: "centos"
 # Yet another way to workaround the naming problem is to create a bond for the
 # interface on all hosts and give the bond name here. Similar strategy can be
 # followed for other types of interfaces.
-#network_interface: "eth0"
+network_interface: ${network_interface}
 
 # These can be adjusted for even more customization. The default is the same as
 # the 'network_interface'. These interfaces must contain an IP address.
@@ -127,7 +127,7 @@ kolla_base_distro: "centos"
 # though an IP address can exist on this interface, it will be unusable in most
 # configurations. It is recommended this interface not be configured with any IP
 # addresses for that reason.
-#neutron_external_interface: "eth1"
+neutron_external_interface: ${neutron_external_interface}
 
 # Valid options are [ openvswitch, linuxbridge, vmware_nsxv, vmware_nsxv3, vmware_dvs, opendaylight ]
 # if vmware_nsxv3 is selected, enable_openvswitch MUST be set to "no" (default is yes)
