@@ -12,6 +12,7 @@ data "template_file" "compute_userdata" {
     docker_registry_password = var.docker_registry_password
     distro = var.kolla.distro
     openStackVersion = var.kolla.openStackVersion
+    username = var.compute.username
   }
 }
 
@@ -70,7 +71,7 @@ resource "vsphere_virtual_machine" "compute" {
    host        = split("/", element(var.compute.ipCidrMgmt, count.index))[0]
    type        = "ssh"
    agent       = false
-   user        = "ubuntu"
+   user        = var.compute.username
    private_key = file(var.compute.private_key_path)
   }
 

@@ -49,6 +49,7 @@ variable "compute" {
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
     defaultGw = "10.206.112.1"
     dns = "10.206.8.130, 10.206.8.131"
+    username = "ubuntu"
   }
 }
 
@@ -67,6 +68,7 @@ variable "controller" {
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
     defaultGw = "10.206.112.1"
     dns = "10.206.8.130, 10.206.8.131"
+    username = "ubuntu"
   }
 }
 
