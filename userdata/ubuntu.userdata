@@ -30,7 +30,7 @@ write_files:
       echo "            set-name: $ifaceLastName" | sudo tee -a ${netplanFile}
       echo "    version: 2" | sudo tee -a ${netplanFile}
       sudo netplan apply
-      sleep 2
+      sleep 10
       sudo usermod -a -G docker ${username}
       su - ${username}
       sleep 2
