@@ -8,7 +8,6 @@ packages:
   - python-selinux
   - python-setuptools
   - python-pip
-  - docker.io
 
 write_files:
   - content: |
@@ -33,7 +32,6 @@ write_files:
       sudo chown ${username}:${username} /etc/kolla/*
       cp /usr/local/share/kolla-ansible/ansible/inventory/* /home/${username}/
       sudo chown ${username}:${username} /home/${username}/*
-      sudo docker run -d -p 5000:5000 --restart=always --name registry registry:2
       /usr/local/bin/kolla-genpwd
       cp /etc/kolla/passwords.yml /etc/kolla/passwords.yml.old
       sed "s/docker_registry_password.*/docker_registry_password: ${docker_registry_password}/g" /etc/kolla/passwords.yml | sudo tee /etc/kolla/tmp.yml
