@@ -36,7 +36,7 @@ data "template_file" "globals" {
 }
 
 resource "null_resource" "foo" {
-  depends_on = [vsphere_virtual_machine.jump]
+  depends_on = [vsphere_virtual_machine.jump, vsphere_virtual_machine.compute, vsphere_virtual_machine.controller]
   connection {
     host = vsphere_virtual_machine.jump.default_ip_address
     type = "ssh"
