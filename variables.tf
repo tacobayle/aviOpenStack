@@ -37,8 +37,8 @@ variable "wait_for_guest_net_timeout" {
 variable "compute" {
   default = {
     name = "os-compute"
-    cpu = 8
-    memory = 8192
+    cpu = 16
+    memory = 32768
     disk = 200
     public_key_path = "~/.ssh/cloudKey.pub"
     private_key_path = "~/.ssh/cloudKey"
@@ -107,6 +107,7 @@ variable "kolla" {
     network_interface = "ens192"
     neutron_external_interface = "ens224"
     internal_vip_address = "10.206.112.121"
-    globals: "/etc/kolla/globals.yml"
+    globals =  "/etc/kolla/globals.yml"
+    openStackVersion = "train"
   }
 }

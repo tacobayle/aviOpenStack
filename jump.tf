@@ -10,7 +10,10 @@ data "template_file" "jumpbox_userdata" {
     vsphere_server = var.vsphere_server
     username = var.jump.username
     privateKey = var.jump.private_key_path
+    docker_registry_username = var.docker_registry_username
     docker_registry_password = var.docker_registry_password
+    distro = var.kolla.distro
+    openStackVersion = var.kolla.openStackVersion
   }
 }
 #

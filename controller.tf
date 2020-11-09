@@ -8,6 +8,10 @@ data "template_file" "controller_userdata" {
     defaultGw = var.controller.defaultGw
     dns = var.controller.dns
     netplanFile = var.controller.netplanFile
+    docker_registry_username = var.docker_registry_username
+    docker_registry_password = var.docker_registry_password
+    distro = var.kolla.distro
+    openStackVersion = var.kolla.openStackVersion
   }
 }
 

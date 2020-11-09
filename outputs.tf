@@ -13,5 +13,5 @@ output "OpenStack_Compute_IP" {
 }
 
 output "Horizon_Dashboard_URL" {
-  value = "http://${var.controller.ipCidrMgmt.0}"
+  value = "http://${var.kolla.internal_vip_address}"
 }

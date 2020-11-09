@@ -8,6 +8,10 @@ data "template_file" "compute_userdata" {
     defaultGw = var.compute.defaultGw
     dns = var.compute.dns
     netplanFile = var.compute.netplanFile
+    docker_registry_username = var.docker_registry_username
+    docker_registry_password = var.docker_registry_password
+    distro = var.kolla.distro
+    openStackVersion = var.kolla.openStackVersion
   }
 }
 

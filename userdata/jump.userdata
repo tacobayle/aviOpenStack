@@ -8,6 +8,7 @@ packages:
   - python-selinux
   - python-setuptools
   - python-pip
+  - docker.io
 
 
 write_files:
@@ -34,9 +35,9 @@ write_files:
       cp /usr/local/share/kolla-ansible/ansible/inventory/* /home/${username}/
       sudo chown ${username}:${username} /home/${username}/*
       /usr/local/bin/kolla-genpwd
-      cp /etc/kolla/passwords.yml /etc/kolla/passwords.yml.old
-      #sed "s/docker_registry_password.*/docker_registry_password: ${docker_registry_password}/g" /etc/kolla/passwords.yml | sudo tee /etc/kolla/tmp.yml
-      #mv /etc/kolla/tmp.yml /etc/kolla/passwords.yml
+      echo "${docker_registry_password}"  | sudo docker login --username {docker_registry_username} --password-stdin
+      sudo docker search kolla | grep ${distro} | sed 's/\s.*$//' | tee list.txt
+      cat list.txt | while read line ; do sudo docker image pull $line:${openStackVersion} ; done
       echo "cloud init done" | tee /tmp/cloudInitDone.log
     path: /opt/bootstrap.sh
     permissions: 0755
