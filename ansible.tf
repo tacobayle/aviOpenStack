@@ -63,6 +63,8 @@ resource "null_resource" "foo" {
   provisioner "remote-exec" {
     inline = [
       "chmod 600 ~/.ssh/${basename(var.jump.private_key_path)}",
+      "cat ${var.kolla.globals}",
+      "cat /etc/kolla/passwords.yml",
       "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} bootstrap-servers",
       "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} prechecks",
       "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} deploy",
