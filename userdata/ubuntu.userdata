@@ -30,6 +30,7 @@ write_files:
       echo "            set-name: $ifaceLastName" | sudo tee -a ${netplanFile}
       echo "    version: 2" | sudo tee -a ${netplanFile}
       sudo netplan apply
+      sleep 5
       sudo docker login --username {docker_registry_username} --password ${docker_registry_password}
       sudo docker search kolla | grep ${distro} | sed 's/\s.*$//' | tee list.txt
       cat list.txt | while read line ; do sudo docker image pull $line:${openStackVersion} ; done
