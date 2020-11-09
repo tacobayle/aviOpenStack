@@ -1,17 +1,17 @@
 # Outputs for Terraform
 
-output "jump IP is" {
+output "jump_IP" {
   value = vsphere_virtual_machine.jump.default_ip_address
 }
 
-output "Controller IP(s) is/are" {
+output "OpenStack_Controller_IP" {
   value = var.controller.ipCidrMgmt.*
 }
 
-output "Compute IP(s) is/are" {
+output "OpenStack_Compute_IP" {
   value = var.compute.ipCidrMgmt.*
 }
 
-output "Horizon Dashboard URL" {
+output "Horizon_Dashboard_URL" {
   value = "http://${var.controller.ipCidrMgmt.0}"
 }
