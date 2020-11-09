@@ -2,7 +2,7 @@
 
 packages:
   - chrony
-
+  - docker.io
 
 write_files:
   - content: |

@@ -4,6 +4,8 @@
 variable "vsphere_user" {}
 variable "vsphere_password" {}
 variable "vsphere_server" {}
+variable "docker_registry_username" {}
+variable "docker_registry_password" {}
 #
 # Other Variables
 #

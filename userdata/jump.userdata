@@ -8,6 +8,7 @@ packages:
   - python-selinux
   - python-setuptools
   - python-pip
+  - docker.io
 
 write_files:
   - content: |
@@ -16,6 +17,7 @@ write_files:
       pip install dnspython
       pip install ansible==${ansibleVersion}
       pip install avisdk==${avisdkVersion}
+      pip install python-openstackclient
       sudo -u ubuntu ansible-galaxy install -f avinetworks.avisdk
       sudo mkdir -p /etc/ansible
       sudo tee /etc/ansible/ansible.cfg > /dev/null <<EOT
@@ -31,7 +33,11 @@ write_files:
       sudo chown ${username}:${username} /etc/kolla/*
       cp /usr/local/share/kolla-ansible/ansible/inventory/* /home/${username}/
       sudo chown ${username}:${username} /home/${username}/*
+      sudo docker run -d -p 5000:5000 --restart=always --name registry registry:2
       /usr/local/bin/kolla-genpwd
+      cp /etc/kolla/passwords.yml /etc/kolla/passwords.yml.old
+      sed "s/docker_registry_password.*/docker_registry_password: ${docker_registry_password}/g" /etc/kolla/passwords.yml | sudo tee /etc/kolla/tmp.yml
+      mv /etc/kolla/tmp.yml /etc/kolla/passwords.yml
       echo "cloud init done" | tee /tmp/cloudInitDone.log
     path: /opt/bootstrap.sh
     permissions: 0755

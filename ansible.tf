@@ -31,6 +31,7 @@ data "template_file" "globals" {
     network_interface = var.kolla.network_interface
     neutron_external_interface = var.kolla.neutron_external_interface
     internal_vip_address = var.kolla.internal_vip_address
+    docker_registry_username = "${var.docker_registry_username}"
   }
 }
 
@@ -51,7 +52,7 @@ resource "null_resource" "foo" {
 
   provisioner "file" {
     content      = data.template_file.multinode.rendered
-    destination = var.ansible.inventory
+    destination = "/home/${var.jump.username}/${var.ansible.inventory}"
   }
 
   provisioner "file" {
@@ -62,6 +63,9 @@ resource "null_resource" "foo" {
   provisioner "remote-exec" {
     inline = [
       "chmod 600 ~/.ssh/${basename(var.jump.private_key_path)}",
+      "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} bootstrap-servers",
+      "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} prechecks",
+      "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} deploy",
     ]
   }
 }
