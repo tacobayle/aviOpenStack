@@ -30,12 +30,14 @@ write_files:
       echo "            set-name: $ifaceLastName" | sudo tee -a ${netplanFile}
       echo "    version: 2" | sudo tee -a ${netplanFile}
       sudo netplan apply
-      sleep 5
+      sleep 2
       sudo usermod -a -G docker ${username}
       su - ${username}
+      sleep 2
       docker login --username ${docker_registry_username} --password ${docker_registry_password}
-      docker search kolla | grep ${distro} | sed 's/\s.*$//' | tee list.txt
-      cat list.txt | while read line ; do docker image pull $line:${openStackVersion} ; done
+      sleep 2
+      docker search kolla | grep ${distro} | sed 's/\s.*$//' | tee /home/${username}/list.txt
+      cat /home/${username}/list.txt | while read line ; do docker image pull $line:${openStackVersion} ; done
       echo "cloud init done" | tee /tmp/cloudInitDone.log
     path: /opt/bootstrap.sh
     permissions: 0755
