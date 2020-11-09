@@ -9,6 +9,7 @@ packages:
   - python-setuptools
   - python-pip
 
+
 write_files:
   - content: |
       #!/bin/bash
@@ -34,8 +35,8 @@ write_files:
       sudo chown ${username}:${username} /home/${username}/*
       /usr/local/bin/kolla-genpwd
       cp /etc/kolla/passwords.yml /etc/kolla/passwords.yml.old
-      sed "s/docker_registry_password.*/docker_registry_password: ${docker_registry_password}/g" /etc/kolla/passwords.yml | sudo tee /etc/kolla/tmp.yml
-      mv /etc/kolla/tmp.yml /etc/kolla/passwords.yml
+      #sed "s/docker_registry_password.*/docker_registry_password: ${docker_registry_password}/g" /etc/kolla/passwords.yml | sudo tee /etc/kolla/tmp.yml
+      #mv /etc/kolla/tmp.yml /etc/kolla/passwords.yml
       echo "cloud init done" | tee /tmp/cloudInitDone.log
     path: /opt/bootstrap.sh
     permissions: 0755
