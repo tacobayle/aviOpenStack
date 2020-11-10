@@ -32,6 +32,10 @@ resource "vsphere_virtual_machine" "jump" {
     network_id = data.vsphere_network.networkMgmt.id
   }
 
+  network_interface {
+    network_id = data.vsphere_network.networkData.id
+  }
+
   num_cpus = var.jump.cpu
   memory = var.jump.memory
   wait_for_guest_net_timeout = var.jump.wait_for_guest_net_timeout

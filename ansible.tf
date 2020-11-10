@@ -66,9 +66,10 @@ resource "null_resource" "foo" {
       "chmod 600 ~/.ssh/${basename(var.jump.private_key_path)}",
       "cat ${var.kolla.globals}",
       "cat /etc/kolla/passwords.yml",
-//      "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} bootstrap-servers",
-//      "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} prechecks",
-//      "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} deploy",
+      "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} bootstrap-servers",
+      "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} prechecks",
+      "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} deploy",
+      "/usr/local/bin/kolla-ansible post-deploy ; sudo chown ${var.jump.username}:${var.jump.username} /etc/kolla/admin-openrc.sh",
     ]
   }
 }
