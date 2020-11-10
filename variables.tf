@@ -111,5 +111,6 @@ variable "kolla" {
     internal_vip_address = "10.206.112.121"
     globals =  "/etc/kolla/globals.yml"
     openStackVersion = "train"
+    enable_neutron_provider_networks = "yes"
   }
 }

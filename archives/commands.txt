@@ -1,3 +1,34 @@
 kolla-ansible -i multinode bootstrap-servers
 kolla-ansible -i multinode prechecks
 kolla-ansible -i multinode deploy
+
+/usr/local/bin/kolla-ansible post-deploy
+sudo chown ubuntu:ubuntu /etc/kolla/admin-openrc.sh
+source /etc/kolla/admin-openrc.sh
+pip install future
+
+
+- name : configure openstack for Avi Controller
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+    - name: create a new project for Avi Control Plane
+      os_project:
+        state: present
+        name: projectAvi
+        description: projectAvi
+        enabled: True
+        domain_id: default
+      register: aviProject
+
+
+    - name: "Grant an admin role on the user admin in the project {{ openstack.project.name }}"
+      os_user_role:
+        user: admin
+        role: admin
+        project: projectAvi
+
+googleDriveId: 19OmINtAIvp6eiq_sj8qdKz1KESRUqmvg

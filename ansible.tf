@@ -31,7 +31,8 @@ data "template_file" "globals" {
     network_interface = var.kolla.network_interface
     neutron_external_interface = var.kolla.neutron_external_interface
     internal_vip_address = var.kolla.internal_vip_address
-    docker_registry_username = "${var.docker_registry_username}"
+    docker_registry_username = var.docker_registry_username
+    enable_neutron_provider_networks = var.kolla.enable_neutron_provider_networks
   }
 }
 
