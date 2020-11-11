@@ -27,6 +27,12 @@ variable "wait_for_guest_net_timeout" {
   default = "5"
 }
 
+variable "ssh" {
+  default = {
+    public_key_file = "~/.ssh/cloudKey.pub"
+  }
+}
+
 variable "compute" {
   default = {
     name = "os-compute"
@@ -94,7 +100,7 @@ variable "ansible" {
     downloadGoogleDriveObjectTag = "v1.00"
     jsonFileOpenStack = "~/fromTfOpenStack.json"
     osAviControllerUrl = "https://github.com/tacobayle/osAviController"
-    osAviControllerTag = "v1.15"
+    osAviControllerTag = "v1.16"
   }
 }
 
@@ -151,15 +157,15 @@ variable "openstack" {
           subnet = "subnet-avicontroller"
         },
         {
-          net = "net-ext",
-          subnet = "subnet-ext"
+          net = "net-avise",
+          subnet = "subnet-avise"
         }
       ]
     }
     key = [
       {
         name = "keyPairsAviController",
-        public_key_file: "~/.ssh/cloudKey.pub"
+        public_key_file: "/home/ubuntu/.ssh/cloudKey.pub"
       }
     ]
     glance = [ # keep Avi in the first position and Ubuntu Bionic in the second position in this list
@@ -186,6 +192,6 @@ variable "avi_controller" {
     securitygroup = "sg-avicontroller" # don't change the name - created automatically
     network = "net-avicontroller"
     image = "Avi-Controller"
-    Ips = ["192.158.10.11"] # the amount of controller is defined based on the length of this list
+    Ips = ["192.168.10.11"] # the amount of controller is defined based on the length of this list
   }
 }

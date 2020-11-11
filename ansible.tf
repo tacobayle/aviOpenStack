@@ -52,8 +52,8 @@ resource "null_resource" "foo" {
   }
 
   provisioner "file" {
-    source = var.openstack.key[0].public_key_file
-    destination = "~/.ssh/${basename(var.openstack.key[0].public_key_file)}"
+    source = var.ssh.public_key_file
+    destination = "/home/${var.jump.username}/.ssh/${basename(var.openstack.key[0].public_key_file)}"
   }
 
     provisioner "file" {
