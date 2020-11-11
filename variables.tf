@@ -92,7 +92,7 @@ variable "ansible" {
     directory = "ansible"
     downloadGoogleDriveObjectUrl = "https://github.com/tacobayle/downloadGoogleDriveObject"
     downloadGoogleDriveObjectTag = "v1.00"
-    jsonFileOpenStack = "~/ansible/vars/fromTfOpenStack.json"
+    jsonFileOpenStack = "~/fromTfOpenStack.json"
     osAviControllerUrl = "https://github.com/tacobayle/osAviController"
     osAviControllerTag = "v1.15"
   }
@@ -165,11 +165,11 @@ variable "openstack" {
     glance = [ # keep Avi in the first position and Ubuntu Bionic in the second position in this list
       {
         name = "Avi-Controller",
-        fileName: "~/controller.qcow2"
+        fileName: "/tmp/controller.qcow2"
       },
       {
         name = "Ubuntu-Bionic",
-        fileName: "~/bionic-server-cloudimg-i386.img"
+        fileName: "/tmp/bionic-server-cloudimg-i386.img"
         url: "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-i386.img"
       },
     ]
