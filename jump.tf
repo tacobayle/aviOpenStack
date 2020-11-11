@@ -13,6 +13,7 @@ data "template_file" "jumpbox_userdata" {
     docker_registry_username = var.docker_registry_username
     docker_registry_password = var.docker_registry_password
     distro = var.kolla.distro
+    netplanFile = var.compute.netplanFile
     openStackVersion = var.kolla.openStackVersion
   }
 }

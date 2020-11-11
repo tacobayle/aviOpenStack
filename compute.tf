@@ -4,7 +4,6 @@ data "template_file" "compute_userdata" {
   vars = {
     pubkey        = file(var.compute.public_key_path)
     ipCidrMgmt = element(var.compute.ipCidrMgmt, count.index)
-    ipCidrData = element(var.compute.ipCidrData, count.index)
     defaultGw = var.compute.defaultGw
     dns = var.compute.dns
     netplanFile = var.compute.netplanFile

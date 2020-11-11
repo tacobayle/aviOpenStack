@@ -1,3 +1,5 @@
+while true ; do docker image ls | wc -l ; sleep 5 ; done
+
 kolla-ansible -i multinode bootstrap-servers
 kolla-ansible -i multinode prechecks
 kolla-ansible -i multinode deploy
@@ -32,3 +34,5 @@ pip install future
         project: projectAvi
 
 googleDriveId: 19OmINtAIvp6eiq_sj8qdKz1KESRUqmvg
+
+openstack network create ext-net --share --external --provider-network-type flat --provider-physical-network physnet1

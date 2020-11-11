@@ -13,5 +13,5 @@ output "OpenStack_Compute_IP" {
 }
 
 output "Horizon_Dashboard_URL" {
-  value = "http://${var.kolla.internal_vip_address}"
+  value = "http://${var.kolla.internal_vip_address} using socks proxy by 'sshing' ${vsphere_virtual_machine.jump.default_ip_address}"
 }

@@ -4,7 +4,6 @@ data "template_file" "controller_userdata" {
   vars = {
     pubkey        = file(var.controller.public_key_path)
     ipCidrMgmt = element(var.controller.ipCidrMgmt, count.index)
-    ipCidrData = element(var.controller.ipCidrData, count.index)
     defaultGw = var.controller.defaultGw
     dns = var.controller.dns
     netplanFile = var.controller.netplanFile

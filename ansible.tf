@@ -47,11 +47,16 @@ resource "null_resource" "foo" {
   }
 
   provisioner "file" {
-    source = var.jump["private_key_path"]
+    source = var.jump.private_key_path
     destination = "~/.ssh/${basename(var.jump.private_key_path)}"
   }
 
   provisioner "file" {
+    source = var.openstack.key[0].public_key_file
+    destination = "~/.ssh/${basename(var.openstack.key[0].public_key_file)}"
+  }
+
+    provisioner "file" {
     content      = data.template_file.multinode.rendered
     destination = "/home/${var.jump.username}/${var.ansible.inventory}"
   }
@@ -69,7 +74,26 @@ resource "null_resource" "foo" {
       "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} bootstrap-servers",
       "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} prechecks",
       "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} deploy",
+      "cd ~ ; git clone ${var.ansible.downloadGoogleDriveObjectUrl} --branch ${var.ansible.downloadGoogleDriveObjectTag} ; cd ${split("/", var.ansible.downloadGoogleDriveObjectUrl)[4]} ; ansible-playbook local.yml --extra-vars 'googleDriveId=${var.avi_googleId_20_1_2_qcow2}' --extra-vars 'outputFile=${var.openstack.glance[0].fileName}'",
+      "cd ~ ; wget ${var.openstack.glance[1].url} -O ${var.openstack.glance[1].fileName}",
       "/usr/local/bin/kolla-ansible post-deploy ; sudo chown ${var.jump.username}:${var.jump.username} /etc/kolla/admin-openrc.sh",
+      "sleep 60",
     ]
   }
+
+  provisioner "file" {
+    content      = <<EOF
+{"openstack": ${jsonencode(var.openstack)}, "avi_controller": ${jsonencode(var.avi_controller)}}
+EOF
+    destination = var.ansible.jsonFileOpenStack
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "cat ${var.ansible.jsonFileOpenStack}",
+      "source /etc/kolla/admin-openrc.sh; cd ~ ; git clone ${var.ansible.osAviControllerUrl} --branch ${var.ansible.osAviControllerTag} ; cd ${split("/", var.ansible.osAviControllerUrl)[4]} ; ansible-playbook main.yml --extra-vars @${var.ansible.jsonFileOpenStack}",
+      "source /etc/kolla/admin-openrc.sh; cd ~ ; env | grep OS_",
+    ]
+  }
+
 }

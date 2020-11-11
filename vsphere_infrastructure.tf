@@ -29,6 +29,6 @@ data "vsphere_network" "networkMgmt" {
 }
 
 data "vsphere_network" "networkData" {
-  name = var.vcenter.networkMgmt
+  name = var.vcenter.networkData
   datacenter_id = data.vsphere_datacenter.dc.id
 }
