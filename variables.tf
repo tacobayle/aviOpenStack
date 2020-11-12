@@ -101,6 +101,7 @@ variable "ansible" {
     jsonFileOpenStack = "~/fromTfOpenStack.json"
     osAviControllerUrl = "https://github.com/tacobayle/osAviController"
     osAviControllerTag = "v1.18"
+    osInventoryUrl = "https://raw.githubusercontent.com/openstack/ansible-collections-openstack/master/scripts/inventory/openstack_inventory.py"
   }
 }
 
@@ -115,6 +116,8 @@ variable "kolla" {
     globals =  "/etc/kolla/globals.yml"
     openStackVersion = "train"
     enable_neutron_provider_networks = "yes"
+    admin_admin = "/etc/kolla/admin-openrc.sh"
+    admin_avi = "/etc/kolla/avi-openrc.sh"
   }
 }
 
@@ -127,6 +130,10 @@ variable "avi" {
 
 variable "openstack" {
   default = {
+    project = {
+      name = "projectAvi"
+      description = "Avi Controller Project"
+    }
     networks = {
       external = {
         cidr = "100.64.129.0/24"

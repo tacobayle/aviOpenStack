@@ -15,6 +15,7 @@ data "template_file" "jumpbox_userdata" {
     distro = var.kolla.distro
     netplanFile = var.compute.netplanFile
     openStackVersion = var.kolla.openStackVersion
+    osInventoryUrl = var.ansible.osInventoryUrl
   }
 }
 #

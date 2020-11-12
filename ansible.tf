@@ -76,7 +76,8 @@ resource "null_resource" "foo" {
       "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} deploy",
       "cd ~ ; git clone ${var.ansible.downloadGoogleDriveObjectUrl} --branch ${var.ansible.downloadGoogleDriveObjectTag} ; cd ${split("/", var.ansible.downloadGoogleDriveObjectUrl)[4]} ; ansible-playbook local.yml --extra-vars 'googleDriveId=${var.avi_googleId_20_1_2_qcow2}' --extra-vars 'outputFile=${var.openstack.glance[0].fileName}'",
       "cd ~ ; wget ${var.openstack.glance[1].url} -O ${var.openstack.glance[1].fileName}",
-      "/usr/local/bin/kolla-ansible post-deploy ; sudo chown ${var.jump.username}:${var.jump.username} /etc/kolla/admin-openrc.sh ; chmod u+x /etc/kolla/admin-openrc.sh",
+      "/usr/local/bin/kolla-ansible post-deploy ; sudo chown ${var.jump.username}:${var.jump.username} ${var.kolla.admin_admin} ; chmod u+x ${var.kolla.admin_admin}",
+      "cat ${var.kolla.admin_admin} | grep -v OS_PROJECT_NAME | tee ${var.kolla.admin_avi} ; echo 'export OS_PROJECT_NAME=${var.openstack.project.name}' | tee -a ${var.kolla.admin_avi}",
       "sleep 60",
     ]
   }
@@ -91,8 +92,7 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "cat ${var.ansible.jsonFileOpenStack}",
-      ". /etc/kolla/admin-openrc.sh; env | grep OS_ ; cd ~ ; git clone ${var.ansible.osAviControllerUrl} --branch ${var.ansible.osAviControllerTag} ; cd ${split("/", var.ansible.osAviControllerUrl)[4]} ; env | grep OS_ ; ansible-playbook main.yml --extra-vars @${var.ansible.jsonFileOpenStack}",
+      ". ${var.kolla.admin_admin}; env | grep OS_ ; cd ~ ; git clone ${var.ansible.osAviControllerUrl} --branch ${var.ansible.osAviControllerTag} ; cd ${split("/", var.ansible.osAviControllerUrl)[4]} ; env | grep OS_ ; ansible-playbook main.yml --extra-vars @${var.ansible.jsonFileOpenStack}",
     ]
   }
-
 }

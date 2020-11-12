@@ -59,6 +59,8 @@ write_files:
       cp /usr/local/share/kolla-ansible/ansible/inventory/* /home/${username}/
       sudo chown ${username}:${username} /home/${username}/*
       /usr/local/bin/kolla-genpwd
+      wget ${osInventoryUrl} -O openstack_inventory.py
+      chmod u+x openstack_inventory.py
       sudo usermod -a -G docker ${username}
       su - ${username}
       sleep 2
