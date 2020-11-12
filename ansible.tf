@@ -104,7 +104,7 @@ controller:
   username: ${var.avi_user}
   version: ${var.avi_controller.version}
   password: ${var.avi_password}
-  count: ${var.avi_controller.count}
+  count: ${length(var.avi_controller.Ips)}
   from_email: ${var.avi_controller.from_email}
   se_in_provider_context: ${var.avi_controller.se_in_provider_context}
   tenant_access_to_provider_se: ${var.avi_controller.tenant_access_to_provider_se}
