@@ -100,7 +100,7 @@ variable "ansible" {
     downloadGoogleDriveObjectTag = "v1.00"
     jsonFileOpenStack = "~/fromTfOpenStack.json"
     osAviControllerUrl = "https://github.com/tacobayle/osAviController"
-    osAviControllerTag = "v1.16"
+    osAviControllerTag = "v1.18"
   }
 }
 
@@ -186,7 +186,6 @@ variable "openstack" {
 
 variable "avi_controller" {
   default = {
-    name = "aviController"
     flavor = "aviSmall"
     key = "keyPairsAviController"
     securitygroup = "sg-avicontroller" # don't change the name - created automatically
