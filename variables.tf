@@ -7,6 +7,8 @@ variable "vsphere_server" {}
 variable "docker_registry_username" {}
 variable "docker_registry_password" {}
 variable "avi_googleId_20_1_2_qcow2" {}
+variable "avi_user" {}
+variable "avi_password" {}
 #
 # Other Variables
 #
@@ -92,7 +94,7 @@ variable "ansible" {
     aviPbAbsentUrl = "https://github.com/tacobayle/ansiblePbAviAbsent"
     aviPbAbsentTag = "v1.36"
     aviConfigureUrl = "https://github.com/tacobayle/aviConfigure"
-    aviConfigureTag = "v2.12"
+    aviConfigureTag = "v2.91"
     version = "2.9.12"
     inventory = "multinode"
     directory = "ansible"
@@ -100,8 +102,9 @@ variable "ansible" {
     downloadGoogleDriveObjectTag = "v1.00"
     jsonFileOpenStack = "~/fromTfOpenStack.json"
     osAviControllerUrl = "https://github.com/tacobayle/osAviController"
-    osAviControllerTag = "v1.2"
+    osAviControllerTag = "v1.22"
     osInventoryUrl = "https://raw.githubusercontent.com/openstack/ansible-collections-openstack/master/scripts/inventory/openstack_inventory.py"
+    yamlFile = "~/fromTf.yml"
   }
 }
 
@@ -186,6 +189,7 @@ variable "openstack" {
         url: "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-i386.img"
       },
     ]
+    controllerPrivateIpsFile = "~/controllerPrivateIps.json"
   }
 }
 
@@ -199,5 +203,22 @@ variable "avi_controller" {
     network = "net-avicontroller"
     image = "Avi-Controller"
     Ips = ["192.168.10.11"] # the amount of controller is defined based on the length of this list
+    dns =  ["8.8.8.8", "8.8.4.4"]
+    ntp = ["95.81.173.155", "188.165.236.162"]
+    floatingIp = "1.1.1.1"
+    from_email = "avicontroller@avidemo.fr"
+    se_in_provider_context = "true"
+    tenant_access_to_provider_se = "true"
+    tenant_vrf = "false"
+    aviCredsJsonFile = "~/ansible/vars/creds.json"
+    environment = "OpenStack"
+    version: "20.1.2"
+  }
+}
+
+variable "domain" {
+  type = map
+  default = {
+    name = "os.avidemo.fr"
   }
 }

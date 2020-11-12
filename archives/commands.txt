@@ -36,3 +36,8 @@ pip install future
 googleDriveId: 19OmINtAIvp6eiq_sj8qdKz1KESRUqmvg
 
 openstack network create ext-net --share --external --provider-network-type flat --provider-physical-network physnet1
+
+====
+
+        - controller.environment == "AWS"
+

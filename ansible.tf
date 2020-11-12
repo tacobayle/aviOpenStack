@@ -92,7 +92,42 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "cat ${var.ansible.jsonFileOpenStack}",
-      ". ${var.kolla.admin_admin}; env | grep OS_ ; cd ~ ; git clone ${var.ansible.osAviControllerUrl} --branch ${var.ansible.osAviControllerTag} ; cd ${split("/", var.ansible.osAviControllerUrl)[4]} ; env | grep OS_ ; ansible-playbook main.yml --extra-vars @${var.ansible.jsonFileOpenStack}",
+      ". ${var.kolla.admin_admin}; cd ~ ; git clone ${var.ansible.osAviControllerUrl} --branch ${var.ansible.osAviControllerTag} ; cd ${split("/", var.ansible.osAviControllerUrl)[4]} ; ansible-playbook main.yml --extra-vars @${var.ansible.jsonFileOpenStack} --extra-vars 'controllerPrivateIpsFile=${var.openstack.controllerPrivateIpsFile}'",
+    ]
+  }
+
+  provisioner "file" {
+    content      = <<EOF
+---
+controller:
+  environment: ${var.avi_controller.environment}
+  username: ${var.avi_user}
+  version: ${var.avi_controller.version}
+  password: ${var.avi_password}
+  count: ${var.avi_controller.count}
+  from_email: ${var.avi_controller.from_email}
+  se_in_provider_context: ${var.avi_controller.se_in_provider_context}
+  tenant_access_to_provider_se: ${var.avi_controller.tenant_access_to_provider_se}
+  tenant_vrf: ${var.avi_controller.tenant_vrf}
+  aviCredsJsonFile: ${var.avi_controller.aviCredsJsonFile}
+
+ntpServers:
+${yamlencode(var.avi_controller["ntp"].*)}
+
+dnsServers:
+${yamlencode(var.avi_controller["dns"].*)}
+
+domain:
+  name: ${var.domain["name"]}
+
+EOF
+    destination = var.ansible["yamlFile"]
+  }
+
+  provisioner "remote-exec" {
+    inline      = [
+      ". ${var.kolla.admin_avi}; cd ~ ; git clone ${var.ansible.aviConfigureUrl} --branch ${var.ansible.aviConfigureTag} ; cd ${split("/", var.ansible.aviConfigureUrl)[4]} ; ansible-playbook -i /home/${var.jump.username}/openstack_inventory.py local.yml --extra-vars @${var.ansible["yamlFile"]} --extra-vars @${var.openstack.controllerPrivateIpsFile}}",
     ]
   }
 }
+
