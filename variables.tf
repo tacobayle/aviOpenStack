@@ -15,13 +15,13 @@ variable "avi_password" {}
 variable "vcenter" {
   type = map
   default = {
-    dc = "wdc-06-vc12"
-    cluster = "wdc-06-vc12c01"
-    datastore = "wdc-06-vc12c01-vsan"
-    resource_pool = "wdc-06-vc12c01/Resources"
+    dc = "sof2-01-vc08"
+    cluster = "sof2-01-vc08c01"
+    datastore = "sof2-01-vc08c01-vsan"
+    resource_pool = "sof2-01-vc08c01/Resources"
     folder = "NicOpenStack"
-    networkMgmt = "vxw-dvs-34-virtualwire-3-sid-6120002-wdc-06-vc12-avi-mgmt"
-    networkData = "vxw-dvs-34-virtualwire-116-sid-6120115-wdc-06-vc12-avi-dev112"
+    networkMgmt = "vxw-dvs-34-virtualwire-3-sid-1080002-sof2-01-vc08-avi-mgmt"
+    networkData = "vxw-dvs-34-virtualwire-116-sid-1080115-sof2-01-vc08-avi-dev112"
   }
 }
 
@@ -45,10 +45,10 @@ variable "compute" {
     private_key_path = "~/.ssh/cloudKey"
     wait_for_guest_net_routable = "false"
     template_name = "ubuntu-bionic-18.04-cloudimg-template"
-    ipCidrMgmt = ["10.206.112.59/22", "10.206.112.124/22"]
+    ipCidrMgmt = ["10.41.134.121/22", "10.41.134.122/22", "10.41.134.123/22"]
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
-    defaultGw = "10.206.112.1"
-    dns = "10.206.8.130, 10.206.8.131"
+    defaultGw = "10.41.132.1"
+    dns = "10.23.108.1, 10.23.108.2"
     username = "ubuntu"
   }
 }
@@ -63,10 +63,10 @@ variable "controller" {
     private_key_path = "~/.ssh/cloudKey"
     wait_for_guest_net_routable = "false"
     template_name = "ubuntu-bionic-18.04-cloudimg-template"
-    ipCidrMgmt = ["10.206.113.255/22"]
+    ipCidrMgmt = ["10.41.134.120/22"]
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
-    defaultGw = "10.206.112.1"
-    dns = "10.206.8.130, 10.206.8.131"
+    defaultGw = "10.41.132.1"
+    dns = "10.23.108.1, 10.23.108.2"
     username = "ubuntu"
   }
 }
@@ -115,7 +115,7 @@ variable "kolla" {
     type = "source"
     network_interface = "ens192"
     neutron_external_interface = "ens224"
-    internal_vip_address = "10.206.112.121"
+    internal_vip_address = "10.41.134.124"
     globals =  "/etc/kolla/globals.yml"
     openStackVersion = "train"
     enable_neutron_provider_networks = "yes"
