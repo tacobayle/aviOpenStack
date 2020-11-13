@@ -15,7 +15,7 @@ data "template_file" "ipCompute" {
 }
 
 data "template_file" "multinode" {
-  template = "${file("templates/multinode.tmpl")}"
+  template = file("templates/multinode.tmpl")
   vars = {
     listControlIp = join("\n", data.template_file.ipControl.*.rendered)
     listComputeIp = join("\n", data.template_file.ipCompute.*.rendered)
@@ -24,7 +24,7 @@ data "template_file" "multinode" {
 }
 
 data "template_file" "globals" {
-  template = "${file("templates/globals.yml.tmpl")}"
+  template = file("templates/globals.yml.tmpl")
   vars = {
     distro = var.kolla.distro
     type = var.kolla.type
