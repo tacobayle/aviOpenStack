@@ -1,5 +1,5 @@
 data "template_file" "ipControl" {
-  template = "${file("templates/ipControl.tmpl")}"
+  template = file("templates/ipControl.tmpl")
   count = length(var.controller.ipCidrMgmt)
   vars = {
     ipControl = split("/", element(var.controller.ipCidrMgmt, count.index))[0]
