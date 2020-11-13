@@ -94,7 +94,7 @@ variable "ansible" {
     aviPbAbsentUrl = "https://github.com/tacobayle/ansiblePbAviAbsent"
     aviPbAbsentTag = "v1.36"
     aviConfigureUrl = "https://github.com/tacobayle/aviConfigure"
-    aviConfigureTag = "v2.91"
+    aviConfigureTag = "v2.93"
     version = "2.9.12"
     inventory = "multinode"
     directory = "ansible"
@@ -210,7 +210,7 @@ variable "avi_controller" {
     se_in_provider_context = "true"
     tenant_access_to_provider_se = "true"
     tenant_vrf = "false"
-    aviCredsJsonFile = "~/ansible/vars/creds.json"
+    aviCredsJsonFile = "~/.avicreds.json"
     environment = "OpenStack"
     version: "20.1.2"
   }
