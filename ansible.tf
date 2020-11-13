@@ -7,7 +7,7 @@ data "template_file" "ipControl" {
 }
 
 data "template_file" "ipCompute" {
-  template = "${file("templates/ipCompute.tmpl")}"
+  template = file("templates/ipCompute.tmpl")
   count = length(var.compute.ipCidrMgmt)
   vars = {
     ipCompute = split("/", element(var.compute.ipCidrMgmt, count.index))[0]
