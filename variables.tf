@@ -85,6 +85,7 @@ variable "jump" {
     avisdkVersion = "18.2.9"
     username = "ubuntu"
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
+    ipCidrData = "100.64.129.10/24"
   }
 }
 

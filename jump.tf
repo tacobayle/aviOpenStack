@@ -16,6 +16,7 @@ data "template_file" "jumpbox_userdata" {
     netplanFile = var.compute.netplanFile
     openStackVersion = var.kolla.openStackVersion
     osInventoryUrl = var.ansible.osInventoryUrl
+    ipCidrData = var.jump.ipCidrData
   }
 }
 #

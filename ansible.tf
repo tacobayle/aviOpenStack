@@ -84,7 +84,7 @@ resource "null_resource" "foo" {
 
   provisioner "file" {
     content      = <<EOF
-{"openstack": ${jsonencode(var.openstack)}, "avi_controller": ${jsonencode(var.avi_controller)}, "extDefaultGw": ${jsonencode(vsphere_virtual_machine.jump.guest_ip_addresses.2)}, "controllerPrivateIpsFile": ${var.openstack.controllerPrivateIpsFile}}
+{"openstack": ${jsonencode(var.openstack)}, "avi_controller": ${jsonencode(var.avi_controller)}, "extDefaultGw": ${jsonencode(split("/", var.jump.ipCidrData)[0])}, "controllerPrivateIpsFile": ${var.openstack.controllerPrivateIpsFile}}
 EOF
     destination = var.ansible.jsonFileOpenStack
   }
