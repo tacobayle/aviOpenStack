@@ -84,7 +84,7 @@ resource "null_resource" "foo" {
 
   provisioner "file" {
     content      = <<EOF
-{"openstack": ${jsonencode(var.openstack)}, "avi_controller": ${jsonencode(var.avi_controller)}}
+{"openstack": ${jsonencode(var.openstack)}, "avi_controller": ${jsonencode(var.avi_controller)}, "extDefaultGw": ${jsonencode(vsphere_virtual_machine.jump.guest_ip_addresses.2)}, "controllerPrivateIpsFile": ${var.openstack.controllerPrivateIpsFile}}
 EOF
     destination = var.ansible.jsonFileOpenStack
   }
@@ -92,7 +92,7 @@ EOF
   provisioner "remote-exec" {
     inline = [
       "cat ${var.ansible.jsonFileOpenStack}",
-      ". ${var.kolla.admin_admin}; cd ~ ; git clone ${var.ansible.osAviControllerUrl} --branch ${var.ansible.osAviControllerTag} ; cd ${split("/", var.ansible.osAviControllerUrl)[4]} ; ansible-playbook main.yml --extra-vars @${var.ansible.jsonFileOpenStack} --extra-vars 'controllerPrivateIpsFile=${var.openstack.controllerPrivateIpsFile}'",
+      ". ${var.kolla.admin_admin}; cd ~ ; git clone ${var.ansible.osAviControllerUrl} --branch ${var.ansible.osAviControllerTag} ; cd ${split("/", var.ansible.osAviControllerUrl)[4]} ; ansible-playbook main.yml --extra-vars @${var.ansible.jsonFileOpenStack}",
     ]
   }
 

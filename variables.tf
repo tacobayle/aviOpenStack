@@ -94,7 +94,7 @@ variable "ansible" {
     aviPbAbsentUrl = "https://github.com/tacobayle/ansiblePbAviAbsent"
     aviPbAbsentTag = "v1.36"
     aviConfigureUrl = "https://github.com/tacobayle/aviConfigure"
-    aviConfigureTag = "v2.93"
+    aviConfigureTag = "v2.95"
     version = "2.9.12"
     inventory = "multinode"
     directory = "ansible"
@@ -102,7 +102,7 @@ variable "ansible" {
     downloadGoogleDriveObjectTag = "v1.00"
     jsonFileOpenStack = "~/fromTfOpenStack.json"
     osAviControllerUrl = "https://github.com/tacobayle/osAviController"
-    osAviControllerTag = "v1.24"
+    osAviControllerTag = "v1.28"
     osInventoryUrl = "https://raw.githubusercontent.com/openstack/ansible-collections-openstack/master/scripts/inventory/openstack_inventory.py"
     yamlFile = "~/fromTf.yml"
   }
@@ -134,8 +134,28 @@ variable "avi" {
 variable "openstack" {
   default = {
     project = {
-      name = "projectAvi"
-      description = "Avi Controller Project"
+      avi = {
+        name = "projectAvi"
+        description = "Avi Controller Project"
+        user = "useravi"
+      }
+      others = [
+        {
+          name = "projectA"
+          description = "projectA"
+          user = "userA"
+        },
+        {
+          name = "projectB"
+          description = "projectB"
+          user = "userB"
+        },
+        {
+          name = "projectC"
+          description = "projectC"
+          user = "userC"
+        }
+      ]
     }
     networks = {
       external = {
