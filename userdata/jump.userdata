@@ -35,8 +35,26 @@ write_files:
       echo "    version: 2" | sudo tee -a ${netplanFile}
       sudo netplan apply
       sleep 10
+      #
+      # iptables section
+      #
+      sudo iptables -A INPUT -i lo -j ACCEPT
+      sudo iptables -A OUTPUT -o lo -j ACCEPT
+      sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+      sudo iptables -A OUTPUT -m conntrack --ctstate ESTABLISHED -j ACCEPT
+      sudo iptables -A FORWARD -i $ifaceLastName -o $ifaceFirstName -j ACCEPT
+      sudo iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+      sudo iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+      sudo iptables -t nat -A POSTROUTING -o $ifaceFirstName -j MASQUERADE
+      sudo ufw --force enable
+      #
+      # pip
+      #
       sudo pip install -U pip
-      pip install netaddr dnspython ansible==${ansibleVersion} avisdk==${avisdkVersion} python-openstackclient openstacksdk future python-neutronclient
+      pip install netaddr dnspython ansible==${ansibleVersion} avisdk==${avisdkVersion} python-openstackclient openstacksdk future python-neutronclient kolla-ansible
+      #
+      # ansible
+      #
       sudo -u ${username} ansible-galaxy install -f avinetworks.avisdk
       sudo mkdir -p /etc/ansible
       sudo tee /etc/ansible/ansible.cfg > /dev/null <<EOT
@@ -45,7 +63,12 @@ write_files:
       host_key_checking = False
       forks=100
       EOT
-      pip install kolla-ansible
+      wget ${osInventoryUrl} -O /home/${username}/openstack_inventory.py
+      sudo chown ${username}:${username} /home/${username}/openstack_inventory.py
+      chmod u+x /home/${username}/openstack_inventory.py
+      #
+      # kolla
+      #
       sudo mkdir -p /etc/kolla
       sudo chown ${username}:${username} /etc/kolla
       cp -r /usr/local/share/kolla-ansible/etc_examples/kolla/* /etc/kolla
@@ -53,9 +76,9 @@ write_files:
       cp /usr/local/share/kolla-ansible/ansible/inventory/* /home/${username}/
       sudo chown ${username}:${username} /home/${username}/*
       /usr/local/bin/kolla-genpwd
-      wget ${osInventoryUrl} -O /home/${username}/openstack_inventory.py
-      sudo chown ${username}:${username} /home/${username}/openstack_inventory.py
-      chmod u+x /home/${username}/openstack_inventory.py
+      #
+      # docker
+      #
       sudo usermod -a -G docker ${username}
       su - ${username}
       sleep 2
