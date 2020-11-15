@@ -62,7 +62,7 @@ write_files:
       docker login --username ${docker_registry_username} --password ${docker_registry_password}
       sleep 2
       #docker search kolla | grep ${distro} | sed 's/\s.*$//' | tee /home/${username}/list.txt
-      cat /home/${username}/list.txt | while read line ; do docker image pull $line:${openStackVersion} ; done
+      #cat /home/${username}/list.txt | while read line ; do docker image pull $line:${openStackVersion} ; done
       echo "cloud init done" | tee /tmp/cloudInitDone.log
     path: /opt/bootstrap.sh
     permissions: 0755
