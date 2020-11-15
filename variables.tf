@@ -48,7 +48,7 @@ variable "compute" {
     ipCidrMgmt = ["10.41.134.121/22", "10.41.134.122/22", "10.41.134.123/22"]
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
     defaultGw = "10.41.132.1"
-    dns = "10.23.108.1, 10.23.108.2"
+    dns = "10.23.108.1, 10.16.142.111"
     username = "ubuntu"
   }
 }
@@ -66,7 +66,7 @@ variable "controller" {
     ipCidrMgmt = ["10.41.134.120/22"]
     netplanFile = "/etc/netplan/50-cloud-init.yaml"
     defaultGw = "10.41.132.1"
-    dns = "10.23.108.1, 10.23.108.2"
+    dns = "10.23.108.1, 10.16.142.111"
     username = "ubuntu"
   }
 }
