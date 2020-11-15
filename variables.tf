@@ -103,7 +103,7 @@ variable "ansible" {
     downloadGoogleDriveObjectTag = "v1.00"
     jsonFileOpenStack = "~/fromTfOpenStack.json"
     osAviControllerUrl = "https://github.com/tacobayle/osAviController"
-    osAviControllerTag = "v1.28"
+    osAviControllerTag = "v1.31"
     osInventoryUrl = "https://raw.githubusercontent.com/openstack/ansible-collections-openstack/master/scripts/inventory/openstack_inventory.py"
     yamlFile = "~/fromTf.yml"
   }
@@ -150,19 +150,14 @@ variable "openstack" {
           name = "projectB"
           description = "projectB"
           user = "userB"
-        },
-        {
-          name = "projectC"
-          description = "projectC"
-          user = "userC"
         }
       ]
     }
     networks = {
       external = {
         cidr = "100.64.129.0/24"
-        allocation_pool_start = "70"
-        allocation_pool_end = "89"
+        allocation_pool_start = "50"
+        allocation_pool_end = "99"
         name = "net-ext"
         subnet = "subnet-ext"
       }
@@ -205,12 +200,13 @@ variable "openstack" {
         fileName: "/tmp/controller.qcow2"
       },
       {
-        name = "Ubuntu-Bionic",
+        name = "Ubuntu-Bionic", # don't change the name
         fileName: "/tmp/bionic-server-cloudimg-i386.img"
         url: "https://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-i386.img"
       },
     ]
     controllerPrivateIpsFile = "~/controllerPrivateIps.json"
+    jsonInputFile = "~/fromTfOpenStack.json"
   }
 }
 
