@@ -136,7 +136,7 @@ variable "openstack" {
   default = {
     project = {
       avi = {
-        name = "projectAvi"
+        name = "avi"
         description = "Avi Controller Project"
         user = "useravi"
       }
@@ -226,7 +226,7 @@ variable "avi_controller" {
     from_email = "avicontroller@avidemo.fr"
     se_in_provider_context = "true"
     tenant_access_to_provider_se = "true"
-    tenant_vrf = "false"
+    tenant_vrf = "true"
     aviCredsJsonFile = "~/.avicreds.json"
     environment = "OpenStack"
     version: "20.1.2"
