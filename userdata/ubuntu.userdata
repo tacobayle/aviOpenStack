@@ -39,8 +39,10 @@ write_files:
       #
       sudo usermod -a -G docker ${username}
       su - ${username}
-      ping www.google.com -c 3
+      ping www.google.com -c 1
+      ping foo -c 1
       while [ $? -ne 0 ] ; do docker login --username ${docker_registry_username} --password ${docker_registry_password} ; sleep 5 ; done
+      ping foo -c 1
       while [ $? -ne 0 ] ; do docker search kolla | grep ${distro} | sed 's/\s.*$//' | tee /home/${username}/list.txt ; sleep 5 ; done
       cat /home/${username}/list.txt | while read line ; do docker image pull $line:${openStackVersion} ; done
       echo "cloud init done" | tee /tmp/cloudInitDone.log
