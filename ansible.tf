@@ -75,7 +75,7 @@ resource "null_resource" "foo" {
       "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} prechecks",
       "kolla-ansible -i /home/${var.jump.username}/${var.ansible.inventory} deploy",
       "cd ~ ; git clone ${var.ansible.downloadGoogleDriveObjectUrl} --branch ${var.ansible.downloadGoogleDriveObjectTag} ; cd ${split("/", var.ansible.downloadGoogleDriveObjectUrl)[4]} ; ansible-playbook local.yml --extra-vars 'googleDriveId=${var.avi_googleId_20_1_2_qcow2}' --extra-vars 'outputFile=${var.openstack.glance[0].fileName}'",
-      "cd ~ ; wget ${var.openstack.glance[1].url} -O ${var.openstack.glance[1].fileName}",
+      "cd ~ ; wget ${var.openstack.glance[1].url} --quiet -O ${var.openstack.glance[1].fileName}",
       "/usr/local/bin/kolla-ansible post-deploy ; sudo chown ${var.jump.username}:${var.jump.username} ${var.kolla.admin_admin} ; chmod u+x ${var.kolla.admin_admin}",
       "cat ${var.kolla.admin_admin} | grep -v OS_PROJECT_NAME | tee ${var.kolla.admin_avi} ; echo 'export OS_PROJECT_NAME=${var.openstack.project.avi.name}' | tee -a ${var.kolla.admin_avi}",
       "sleep 60",
