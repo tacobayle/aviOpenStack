@@ -95,7 +95,7 @@ variable "ansible" {
     aviPbAbsentUrl = "https://github.com/tacobayle/ansiblePbAviAbsent"
     aviPbAbsentTag = "v1.36"
     aviConfigureUrl = "https://github.com/tacobayle/aviConfigure"
-    aviConfigureTag = "v2.95"
+    aviConfigureTag = "v2.96"
     version = "2.9.12"
     inventory = "multinode"
     directory = "ansible"
@@ -103,7 +103,7 @@ variable "ansible" {
     downloadGoogleDriveObjectTag = "v1.00"
     jsonFileOpenStack = "~/fromTfOpenStack.json"
     osAviControllerUrl = "https://github.com/tacobayle/osAviController"
-    osAviControllerTag = "v1.33"
+    osAviControllerTag = "v1.38"
     osInventoryUrl = "https://raw.githubusercontent.com/openstack/ansible-collections-openstack/master/scripts/inventory/openstack_inventory.py"
     yamlFile = "~/fromTf.yml"
   }
@@ -207,6 +207,7 @@ variable "openstack" {
     ]
     controllerPrivateIpsFile = "~/controllerPrivateIps.json"
     jsonInputFile = "~/fromTfOpenStack.json"
+    jsonOutputFile = "~/openstack_configuration.json"
   }
 }
 

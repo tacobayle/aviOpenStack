@@ -126,7 +126,7 @@ EOF
 
   provisioner "remote-exec" {
     inline      = [
-      ". ${var.kolla.admin_avi}; cd ~ ; git clone ${var.ansible.aviConfigureUrl} --branch ${var.ansible.aviConfigureTag} ; cd ${split("/", var.ansible.aviConfigureUrl)[4]} ; ansible-playbook -i /home/${var.jump.username}/openstack_inventory.py local.yml --extra-vars @${var.ansible.yamlFile} --extra-vars @${var.openstack.controllerPrivateIpsFile}",
+      ". ${var.kolla.admin_avi}; cd ~ ; git clone ${var.ansible.aviConfigureUrl} --branch ${var.ansible.aviConfigureTag} ; cd ${split("/", var.ansible.aviConfigureUrl)[4]} ; ansible-playbook -i /home/${var.jump.username}/openstack_inventory.py local.yml --extra-vars @${var.ansible.yamlFile} --extra-vars @${var.openstack.controllerPrivateIpsFile} --extra-vars @${var.openstack.jsonOutputFile}",
     ]
   }
 }
