@@ -84,9 +84,9 @@ write_files:
       #
       sudo usermod -a -G docker ${username}
       su - ${username}
-      sleep 2
-      docker login --username ${docker_registry_username} --password ${docker_registry_password}
-      sleep 2
+      ping www.google.com -c 1
+      ping foo -c 1
+      while [ $? -ne 0 ] ; do docker login --username ${docker_registry_username} --password ${docker_registry_password} ; sleep 5 ; done
       #docker search kolla | grep ${distro} | sed 's/\s.*$//' | tee /home/${username}/list.txt
       #cat /home/${username}/list.txt | while read line ; do docker image pull $line:${openStackVersion} ; done
       echo "cloud init done" | tee /tmp/cloudInitDone.log
