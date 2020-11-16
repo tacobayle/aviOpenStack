@@ -103,7 +103,7 @@ variable "ansible" {
     downloadGoogleDriveObjectTag = "v1.00"
     jsonFileOpenStack = "~/fromTfOpenStack.json"
     osAviControllerUrl = "https://github.com/tacobayle/osAviController"
-    osAviControllerTag = "v1.32"
+    osAviControllerTag = "v1.33"
     osInventoryUrl = "https://raw.githubusercontent.com/openstack/ansible-collections-openstack/master/scripts/inventory/openstack_inventory.py"
     yamlFile = "~/fromTf.yml"
   }
