@@ -40,10 +40,8 @@ write_files:
       sudo usermod -a -G docker ${username}
       su - ${username}
       ping www.google.com -c 1
-      ping foo -c 1
-      while [ $? -ne 0 ] ; sleep 2 ; do docker login --username ${docker_registry_username} --password ${docker_registry_password} ; done
-      ping foo -c 1
-      while [ $? -ne 0 ] ; sleep 2 ; do docker search kolla | grep ${distro} | sed 's/\s.*$//' | tee /home/${username}/list.txt ; done
+      status=1 ; while [ $status != "0" ] ; do docker login --username ${docker_registry_username} --password ${docker_registry_password} ; status=$? ; done
+      status=1 ; while [ $status != "0" ] ; do docker search kolla | grep ${distro} | sed 's/\s.*$//' | tee /home/${username}/list.txt ; status=$? ; done
       cat /home/${username}/list.txt | while read line ; do docker image pull $line:${openStackVersion} ; done
       echo "cloud init done" | tee /tmp/cloudInitDone.log
     path: /opt/bootstrap.sh
