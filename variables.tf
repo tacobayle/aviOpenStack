@@ -6,7 +6,7 @@ variable "vsphere_password" {}
 variable "vsphere_server" {}
 variable "docker_registry_username" {}
 variable "docker_registry_password" {}
-variable "avi_googleId_20_1_2_qcow2" {}
+variable "avi_googleId_20_1_4_qcow2" {}
 variable "avi_user" {}
 variable "avi_password" {}
 #
