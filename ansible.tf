@@ -101,7 +101,7 @@ EOF
 ---
 controller:
   environment: ${var.avi_controller.environment}
-  username: ${var.avi_user}
+  username: ${var.avi_username}
   version: ${var.avi_controller.version}
   password: ${var.avi_password}
   count: ${length(var.avi_controller.Ips)}
